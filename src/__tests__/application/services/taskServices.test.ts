@@ -7,7 +7,7 @@
   markTaskCompleted
 } = require("../src/todo-list");*/
 
-import { TaskManager } from "../../application/services/taskService";
+import { TaskManager } from "../../../application/services/taskService";
 
 let taskManager: TaskManager; //Intanciar TaskManager to use its methods
 
