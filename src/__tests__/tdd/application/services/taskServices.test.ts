@@ -7,23 +7,28 @@
   markTaskCompleted
 } = require("../src/todo-list");*/
 
-import { TaskManager } from "../../../application/services/taskService";
+import { TaskManager } from "../../../../application/services/taskService";
+import { IIdGenerator } from "../../../../domain/interfaces/IIdGenerator";
 
 let taskManager: TaskManager; //Intanciar TaskManager to use its methods
+let mockIdGenerator: IIdGenerator;
 
 //before each test, we eecure a new instance of TaskManager. Is needed to ensure each test is initialized without previous tests alterations
 beforeEach(() => {
-  taskManager = new TaskManager();
+  mockIdGenerator = {
+    generate: jest.fn(() => "mock-id")
+  };
+  taskManager = new TaskManager(mockIdGenerator);
 });
 
 describe("setTaskList method", () => {
   it("should set the task list correctly", () => {
     //create an instance of the class
-    const taskManager = new TaskManager();
+    const taskManager = new TaskManager(mockIdGenerator);
     //mock task list
     const mockTaskList = [
-      { task: "Task 1", isChecked: false },
-      { task: "Task 2", isChecked: true }
+      { id: "1", task: "Task 1", isChecked: false },
+      { id: "2", task: "Task 2", isChecked: true }
     ];
 
     //call setTaskList with the mockTaskList

@@ -1,9 +1,13 @@
 import { Task } from "../../domain/entities/task";
+import { UuidGenerator } from "../../infrastructure/idGenerator/uiidGenerator";
 
 export class TaskManager {
   private taskList: Task[] = [];
+  private idGenerator: UuidGenerator;
 
-  //constructor() {} //emty as is it meant to manage a list of task, therefore no properties are specific to a sicngle task. It only have a list of task and methods. Can be omited as it is empty
+  constructor(idGenerator: UuidGenerator) {
+    this.idGenerator = idGenerator;
+  }
 
   //set new list of tasks
   setTaskList(tasks: Task[]): void {
@@ -12,12 +16,17 @@ export class TaskManager {
 
   //allows other parts of the code get a copy of task list. Is needed for the tests
   getTaskList(): Task[] {
-    return this.taskList;
+    return this.taskList.slice(); //slice to provent mutation of the array
   }
 
   // Add a new task to taskList array
   addTask(newTask: string): Task[] {
     const taskExists = this.taskList.some((task) => task.task === newTask);
+    const generateNewTask = new Task(
+      this.idGenerator.generate(),
+      newTask,
+      false
+    );
 
     if (newTask === "") {
       throw new Error("Tarea vacía");
@@ -27,10 +36,7 @@ export class TaskManager {
       throw new Error("La tarea ya está en la lista");
     }
 
-    this.taskList.push({
-      task: newTask,
-      isChecked: false
-    });
+    this.taskList.push(generateNewTask);
 
     return this.taskList;
   }
