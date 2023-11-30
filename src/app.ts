@@ -1,3 +1,5 @@
+//app.ts entry point to my application
+
 import express from "express";
 import taskRouter from "./infrastructure/interfaces/routes/apiRoutes";
 

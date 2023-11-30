@@ -1,12 +1,3 @@
-/* const {
-  taskList,
-  Task,
-  setTaskList,
-  addInput,
-  removeInput,
-  markTaskCompleted
-} = require("../src/todo-list");*/
-
 import { TaskManager } from "../../../../application/services/taskService";
 import { IIdGenerator } from "../../../../domain/interfaces/IIdGenerator";
 
