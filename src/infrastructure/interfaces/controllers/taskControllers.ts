@@ -4,6 +4,7 @@ import { Request, Response } from "express";
 import { InMemoryTaskRepository } from "../../../repositories/InMemoryTaskRepository";
 import { Task } from "../../../domain/entities/task";
 import { UuidGenerator } from "../../idGenerator/uiidGenerator";
+
 export class TaskController {
   private idGenerator: UuidGenerator;
   private taskRepository: InMemoryTaskRepository;
