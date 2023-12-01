@@ -1,21 +1,24 @@
 import { TaskManager } from "../../../../application/services/taskService";
 import { IIdGenerator } from "../../../../domain/interfaces/IIdGenerator";
+import { InMemoryTaskRepository } from "../../../../repositories/InMemoryTaskRepository";
 
 let taskManager: TaskManager; //Intanciar TaskManager to use its methods
 let mockIdGenerator: IIdGenerator;
+let mockTaskRepository: InMemoryTaskRepository;
 
-//before each test, we eecure a new instance of TaskManager. Is needed to ensure each test is initialized without previous tests alterations
+//before each test, we secure a new instance of TaskManager. Is needed to ensure each test is initialized without previous tests alterations
 beforeEach(() => {
   mockIdGenerator = {
     generate: jest.fn(() => "mock-id")
   };
-  taskManager = new TaskManager(mockIdGenerator);
+  mockTaskRepository = new InMemoryTaskRepository();
+  taskManager = new TaskManager(mockTaskRepository, mockIdGenerator);
 });
 
 describe("setTaskList method", () => {
   it("should set the task list correctly", () => {
     //create an instance of the class
-    const taskManager = new TaskManager(mockIdGenerator);
+    const taskManager = new TaskManager(mockTaskRepository, mockIdGenerator);
     //mock task list
     const mockTaskList = [
       { id: "1", task: "Task 1", isChecked: false },
@@ -42,19 +45,19 @@ describe("add task to array list", () => {
     );
   });
 
-  it("add new task if does not exist", () => {
-    taskManager.addTask("task4");
-    const currentTaskList = taskManager.getTaskList();
+  it("add new task if does not exist", async () => {
+    await taskManager.addTask("task4");
+    const currentTaskList = await taskManager.getTaskList();
     expect(currentTaskList.some((task) => task.task === "task4")).toBe(true);
   });
 });
 
 describe("Mark task as completed", () => {
-  it("marks task4 as completed", () => {
-    taskManager.addTask("task4");
-    taskManager.markTaskCompleted("task4");
+  it("marks task4 as completed", async () => {
+    await taskManager.addTask("task4");
+    await taskManager.markTaskCompleted("task4");
 
-    const currentTaskList = taskManager.getTaskList();
+    const currentTaskList = await taskManager.getTaskList();
     const task4 = currentTaskList.find((task) => task.task === "task4");
 
     expect(task4?.isChecked).toBe(true);
@@ -79,15 +82,16 @@ describe("remove task to list", () => {
     expect(updatedTaskList).toEqual(initialTaskList);
   });
 
-  it("removes task4 from taskList when checked", () => {
-    taskManager.addTask("task4");
-    taskManager.markTaskCompleted("task4");
+  it("removes task4 from taskList when checked", async () => {
+    await taskManager.addTask("task4");
+    await taskManager.markTaskCompleted("task4");
     //task list initial length
-    const initialLength = taskManager.getTaskList().length;
+    const initialTaskList = await taskManager.getTaskList();
+    const initialLength = initialTaskList.length;
 
     // Remove task
-    taskManager.removeTask("task4");
-    const updatedList = taskManager.removeTask("task4");
+    await taskManager.removeTask("task4");
+    const updatedList = await taskManager.getTaskList();
 
     // we check if task4 has been removed from list
     expect(updatedList.length).toBe(initialLength - 1);

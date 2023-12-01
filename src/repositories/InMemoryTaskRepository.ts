@@ -4,6 +4,10 @@ import { Task } from "../domain/entities/task";
 export class InMemoryTaskRepository implements TaskRepository {
   private tasks: Task[] = [];
 
+  async setTaskList(tasks: Task[]): Promise<void> {
+    this.tasks = [...tasks];
+  }
+
   async getAll(): Promise<Task[]> {
     return this.tasks;
   }

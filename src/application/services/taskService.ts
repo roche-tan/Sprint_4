@@ -18,14 +18,14 @@ export class TaskManager {
   }
 
   //set new list of tasks
-  // setTaskList(tasks: Task[]): void {
-  //   this.taskList = [...tasks];
-  // }
+  async setTaskList(tasks: Task[]): Promise<void> {
+    await this.taskRepository.setTaskList(tasks);
+  }
 
   // //allows other parts of the code get a copy of task list. Is needed for the tests
-  // getTaskList(): Task[] {
-  //   return this.taskList.slice(); //slice to provent mutation of the array
-  // }
+  async getTaskList(): Promise<Task[]> {
+    return await this.taskRepository.getAll(); //slice to provent mutation of the array
+  }
 
   // Add a new task to taskList array
   // addTask(newTask: string): Task[] {
