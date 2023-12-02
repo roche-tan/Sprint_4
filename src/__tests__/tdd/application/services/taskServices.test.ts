@@ -31,6 +31,11 @@ describe("setTaskList method", () => {
     // Check if taskList property of the instance is updated
     expect(taskManager.getTaskList()).toEqual(mockTaskList);
   });
+
+  it("should return an empty list when no tasks are added", async () => {
+    const tasks = await taskManager.getTaskList();
+    expect(tasks).toEqual([]);
+  });
 });
 
 describe("add task to array list", () => {
@@ -52,7 +57,7 @@ describe("add task to array list", () => {
   });
 });
 
-describe("Mark task as completed", () => {
+describe("Update task", () => {
   it("marks task4 as completed", async () => {
     await taskManager.addTask("task4");
     await taskManager.markTaskCompleted("task4");
@@ -62,9 +67,20 @@ describe("Mark task as completed", () => {
 
     expect(task4?.isChecked).toBe(true);
   });
+
+  it("should allow marking a completed task as not completed", async () => {
+    await taskManager.addTask("task6");
+    await taskManager.markTaskCompleted("task6");
+
+    await taskManager.markTaskCompleted("task6"); // Revert to not completed
+    const task = (await taskManager.getTaskList()).find(
+      (t) => t.task === "task6"
+    );
+    expect(task?.isChecked).toBe(false);
+  });
 });
 
-describe("remove task to list", () => {
+describe("Remove task to list", () => {
   it("should throw error if task is not checked", () => {
     taskManager.addTask("task1");
     expect(() => taskManager.removeTask("task1")).toThrow("Tarea no marcada");

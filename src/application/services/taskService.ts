@@ -80,9 +80,7 @@ export class TaskManager {
       throw new Error("Tarea no encontrada");
     }
 
-    if (taskToMark) {
-      taskToMark.isChecked = !taskToMark.isChecked;
-    }
+    taskToMark.isChecked = !taskToMark.isChecked;
     await this.taskRepository.update(taskToMark);
   }
 }
