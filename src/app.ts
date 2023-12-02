@@ -1,23 +1,24 @@
 //app.ts entry point to my application
 
 import express from "express";
+import cors from "cors";
 import taskRouter from "./infrastructure/interfaces/routes/apiRoutes";
+import { cacheControlMiddleWare } from "./infrastructure/interfaces/middlewares/cacheControlMiddleware";
+import { authMiddleware } from "./infrastructure/interfaces/middlewares/authMiddleware";
 
 const app = express();
 app.use(express.json()); //middleware that transforms a req.body to a json
 
-const PORT = 3000;
-
-//in apiRoutes
-app.get("/", (req, res) => {
-  console.log("someon pinged here"); //appears in terminal
-  res.send("ping-pong"); //appears in localhost/3000
-});
+//the ORDER of the middlewares are important. This allows the application to work properly
+app.use(cors());
+app.use(cacheControlMiddleWare);
+app.use(authMiddleware);
 
 //use router
 app.use("/api", taskRouter);
 
-//iniciar servidor
+//start server
+const PORT = 3000;
 app.listen(PORT, () => {
   console.log(`Server running in port ${PORT}`); //appears in terminal
 });
