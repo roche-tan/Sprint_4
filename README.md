@@ -1,83 +1,39 @@
-# Ejemplo básico de TS
+# API to-do list
 
 ---
 
-En este ejemplo básico hay:
+In this project I created a To-do list API with Postman testing.
 
-- ESLint
-- Prettier
-- ts-jest
-- nodemon
-- VSCode Debugging
-- Github Actions
-- Pequeño ejemplo de código funcional con import
+- Typescript
+- Nodejs
+- test-jest
+- Hexagonal
+- Postman
+  
+### Installation
 
-La configuración del debugger apunta a src/index.ts como archivo de inicio del proyecto.
+1. Clone this repository to your local machine:
 
-Comandos:
+   `git clone https://github.com/roche-tan/Sprint_4.git `
 
-Testing:
+2. Move to folder
 
-```sh
-npm run test
-```
+3. Install all project dependencies in each folder:
 
-Ejecuta los tests ignorando los que existan en dist/
+   `npm install`
 
-Prettier format:
+### Usage
 
-```sh
-npm run prettier-format
-```
+- To manually transpile from Typescript to Javascript:
 
-Ejecuta manualmente el prettier en el proyecto, recomiendo instalar la extensión prettier y que se autoejecute al guardar.
+  `npx tsc`
 
-Watcher:
+- To run Jest tests:
 
-```sh
-npm run dev:watcher
-```
+  `npm test`
 
-Ejecuta nodemon usando src/index.ts como archivo inicial
+- To run API:
+  
+  `npm start`
 
-Dev Run:
-
-```sh
-npm run dev:run
-```
-
-Ejecuta el proyecto sin watcher
-
-Build:
-
-```sh
-npm run build
-```
-
-Transpila el proyecto en dist/
-
----
-
-## Debugger
-
-en el archivo .vscode/launch.json está la configuración del debugger.
-
-```json
-{
-  // Use IntelliSense to learn about possible attributes.
-  // Hover to view descriptions of existing attributes.
-  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
-  "version": "0.2.0",
-  "configurations": [
-    {
-      "type": "node",
-      "request": "launch",
-      "name": "Lanza debug",
-      "preLaunchTask": "tsc: build - tsconfig.json",
-      "skipFiles": ["<node_internals>/**"],
-      "program": "${workspaceFolder}/src/index.ts",
-      "outFiles": ["${workspaceFolder}/dist/**/*.js"]
-    }
-  ]
-}
-```
+Test done in Postman are in json format in this repository
