@@ -11,10 +11,15 @@ const router = express.Router(); //create router
 const taskRepository = new InMemoryTaskRepository();
 const idGenerator = new UuidGenerator();
 const taskController = new TaskController(idGenerator, taskRepository);
+console.log("apiRoutes", taskRepository);
 
-router.get("/tasks", taskController.getAllTask);
-router.post("/tasks", taskController.addTask);
-router.put("/tasks/:id", taskController.updateTask);
-router.delete("/tasks/:id", taskController.deleteTask);
+// router.get("/tasks", taskController.getAllTask); //this gets undefined result
+router.get("/tasks", (req, res) => taskController.getAllTask(req, res));
+
+// router.post("/tasks", taskController.addTask);
+router.post("/tasks", (req, res) => taskController.addTask(req, res));
+
+router.put("/tasks/:id", (req, res) => taskController.updateTask(req, res));
+router.delete("/tasks/:id", (req, res) => taskController.deleteTask(req, res));
 
 export default router;

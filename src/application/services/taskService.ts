@@ -30,6 +30,7 @@ export class TaskManager {
   // Add a new task to taskList array
   // addTask(newTask: string): Task[] {
   async addTask(newTask: string): Promise<Task> {
+    console.log("newtask", newTask);
     // const generateNewTask = new Task(
     //   this.idGenerator.generate(),
     //   newTask,
@@ -40,8 +41,10 @@ export class TaskManager {
       throw new Error("Tarea vacía");
     }
 
+    const task = new Task(this.idGenerator.generate(), newTask, false);
+
     const taskExists = (await this.taskRepository.getAll()).some(
-      (task) => task.task === newTask
+      (task) => task.newTask === newTask
     );
 
     if (taskExists) {
@@ -50,21 +53,19 @@ export class TaskManager {
 
     // this.taskList.push(generateNewTask);
 
-    const task = new Task(this.idGenerator.generate(), newTask, false);
-
     return this.taskRepository.add(task);
   }
 
   // remove a task from list
   async removeTask(taskName: string): Promise<void> {
-    const task = await this.taskRepository.getAll();
-    const taskToDelete = task.find((task) => task.task === taskName);
+    const tasks = await this.taskRepository.getAll();
+    const taskToDelete = tasks.find((task) => task.newTask === taskName);
 
     if (!taskToDelete) {
       throw new Error("Tarea no encontrada");
     }
 
-    if (!taskToDelete.isChecked) {
+    if (!taskToDelete.isCompleted) {
       throw new Error("Tarea no marcada como completa");
     }
 
@@ -74,13 +75,13 @@ export class TaskManager {
   // Mark task as completed
   async markTaskCompleted(taskName: string): Promise<void> {
     const tasks = await this.taskRepository.getAll();
-    const taskToMark = tasks.find((task) => task.task === taskName);
+    const taskToMark = tasks.find((task) => task.newTask === taskName);
 
     if (!taskToMark) {
       throw new Error("Tarea no encontrada");
     }
 
-    taskToMark.isChecked = !taskToMark.isChecked;
+    taskToMark.isCompleted = !taskToMark.isCompleted;
     await this.taskRepository.update(taskToMark);
   }
 }

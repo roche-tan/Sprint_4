@@ -1,11 +1,13 @@
 //app.ts entry point to my application
 
 import express from "express";
+import dotenv from "dotenv";
 import cors from "cors";
 import taskRouter from "./infrastructure/interfaces/routes/apiRoutes";
 import { cacheControlMiddleWare } from "./infrastructure/interfaces/middlewares/cacheControlMiddleware";
 import { authMiddleware } from "./infrastructure/interfaces/middlewares/authMiddleware";
 
+dotenv.config(); // to add environment variables from a .env file into process.env, making them accessible though the application. This is needed in authMiddleware
 const app = express();
 app.use(express.json()); //middleware that transforms a req.body to a json
 
@@ -15,7 +17,7 @@ app.use(cacheControlMiddleWare);
 app.use(authMiddleware);
 
 //use router
-app.use("/api", taskRouter);
+app.use("/", taskRouter);
 
 //start server
 const PORT = 3000;

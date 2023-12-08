@@ -1,11 +1,11 @@
 export class Task {
   id: string;
-  task: string;
-  isChecked: boolean;
+  newTask: string;
+  isCompleted: boolean;
 
-  constructor(id: string, task: string, isChecked: boolean) {
+  constructor(id: string, newTask: string, isCompleted: boolean) {
     this.id = id;
-    this.task = task;
-    this.isChecked = isChecked;
+    this.newTask = newTask;
+    this.isCompleted = isCompleted;
   }
 }

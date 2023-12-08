@@ -22,6 +22,9 @@ export class InMemoryTaskRepository implements TaskRepository {
       (task) => task.id === taskToUpdate.id
     );
 
+    console.log("Received taskToUpdate:", taskToUpdate);
+    console.log("Current tasks:", this.tasks);
+
     if (taskIndex === -1) {
       throw new Error("Task not found");
     }
