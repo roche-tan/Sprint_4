@@ -18,12 +18,12 @@ In this project I created a To-do list API with Postman testing.
 
 2. HTTP Methods: GET, POST, PUT and DELETE
 #### Get All Tasks
-  ```Method: GET
+  `Method: GET
   Endpoint: /tasks
   Description: Retrieves a list of all tasks.
   Parameters: None
   Success (200): Returns an array of tasks.
-  Error (500): Returns an error message if an unexpected error occurs.```
+  Error (500): Returns an error message if an unexpected error occurs.`
 
 #### Add Task
    ```Method: POST
