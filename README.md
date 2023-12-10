@@ -34,7 +34,7 @@ In this project I created a To-do list API with Postman testing.
     taskName: String (required)
     isCompleted: Boolean (required)
   Success (201): Returns the created task.
-  Error (400): Returns an error message for invalid input or unexpected errors. ```
+  Error (400): Returns an error message for invalid input or unexpected errors.
 
 - Update Task
 
@@ -45,7 +45,7 @@ In this project I created a To-do list API with Postman testing.
     id: String (required, path parameter)
     Request Body: Task object with updated fields.
   Success (200): Returns the updated task.
-  Error (500): Returns an error message if an unexpected error occurs. ```
+  Error (500): Returns an error message if an unexpected error occurs.
 
 - Delete Task
 
@@ -54,14 +54,14 @@ In this project I created a To-do list API with Postman testing.
   Description: Deletes a task based on its ID.
   id: String (required, path parameter)
   Success (200): Message confirming deletion.
-  Error (500): Returns an error message if an unexpected error occurs. ```
+  Error (500): Returns an error message if an unexpected error occurs.
 
 - Error Handling
 
    ```Task Not Found: Returned when a task with the specified ID does not exist.
   Empty Task Error: Returned when an attempt is made to add an empty task.
   Task Already Exists: Returned when an attempt is made to add a task that already exists.
-  Task Not Completed: Returned when an attempt is made to delete a task that is not marked as completed. ```
+  Task Not Completed: Returned when an attempt is made to delete a task that is not marked as completed.
 
 ### Installation
 
