@@ -17,15 +17,16 @@ In this project I created a To-do list API with Postman testing.
    Password: admin
 
 2. HTTP Methods: GET, POST, PUT and DELETE
-#### Get All Tasks
-  `Method: GET
+- Get All Tasks
+  ```Method: GET
   Endpoint: /tasks
   Description: Retrieves a list of all tasks.
   Parameters: None
   Success (200): Returns an array of tasks.
-  Error (500): Returns an error message if an unexpected error occurs.`
+  Error (500): Returns an error message if an unexpected error occurs.```
 
-#### Add Task
+- Add Task
+
    ```Method: POST
   Endpoint: /tasks
   Description: Adds a new task to the list.
@@ -35,7 +36,8 @@ In this project I created a To-do list API with Postman testing.
   Success (201): Returns the created task.
   Error (400): Returns an error message for invalid input or unexpected errors. ```
 
-#### Update Task
+- Update Task
+
    ```Method: PUT
   Endpoint: /tasks/:id
   Description: Updates an existing task.
@@ -45,7 +47,8 @@ In this project I created a To-do list API with Postman testing.
   Success (200): Returns the updated task.
   Error (500): Returns an error message if an unexpected error occurs. ```
 
-#### Delete Task
+- Delete Task
+
    ```Method: DELETE
   Endpoint: /tasks/:id
   Description: Deletes a task based on its ID.
@@ -53,7 +56,8 @@ In this project I created a To-do list API with Postman testing.
   Success (200): Message confirming deletion.
   Error (500): Returns an error message if an unexpected error occurs. ```
 
-#### Error Handling
+- Error Handling
+
    ```Task Not Found: Returned when a task with the specified ID does not exist.
   Empty Task Error: Returned when an attempt is made to add an empty task.
   Task Already Exists: Returned when an attempt is made to add a task that already exists.
